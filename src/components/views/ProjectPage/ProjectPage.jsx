@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar as CustomNavbar, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import axios from '../../axiosConfig';
+//import axios from '../../axiosConfig';
+import axios from 'axios';
 
 function ProjectPage() {
 
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
-    const [newProject, setNewProject] = useState({});
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         // Fetch data from the API endpoint using Axios
         axios.get('/projects')
             .then(response => {
                 setProjects(response.data);
-                setNewProject(response.data[0]); // Assuming the first project for demonstration
             })
-            .catch(error => console.error('Error fetching data:', error));
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                setError('Error fetching data. Please try again.'); // Set error state
+            });
     }, []);
 
 
@@ -35,15 +38,79 @@ function ProjectPage() {
     <div className="Slider" style={{width: 1447, height: 66, left: 0, top: 177, position: 'absolute', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>
       <div className="Rectangle3" style={{width: 1447, height: 66, background: '#E9E4FF'}} />
     </div>
-    <div className="ProjectName" style={{left: 69, top: 549, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Project Name</div>
-    <div className="StartDate" style={{left: 877, top: 549, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Start date</div>
-    <div className="Duration" style={{left: 1077, top: 549, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Duration</div>
-    <div className="Status" style={{left: 1271, top: 549, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Status</div>
     <div className="Project" style={{left: 48, top: 286, position: 'absolute', color: '#412C86', fontSize: 36, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Project</div>
     <div className="OurProjectAreAsFollows" style={{left: 48, top: 414, position: 'absolute', color: '#777777', fontSize: 32, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Our project are as follows :</div>
     
     <div className="Rectangle23" style={{width: 139, height: 65, left: 174, top: 177, position: 'absolute', background: '#A994FF'}} />
     
+    {/*  
+    <div className="Frame3" style={{width: 610, height: 142, left: -300, position: 'relative', marginTop: 200}}>
+    <div className="Rectangle25" style={{width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5'}} />
+    <div className="Rectangle26" style={{width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF'}} />
+    <div className="Etri" style={{left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>etri</div>
+    <div className="01202306" style={{width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>2023-01 - 2023-06</div>
+    <div style={{left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word'}}>빅테크 기업 프로젝트</div>
+    <div className="Rectangle27" style={{width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF'}} />
+    <div className="Rectangle27" style={{width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
+    <div className="Java" style={{width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Java</div>
+    <div className="Rectangle28" style={{width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
+    <div className="SpringBoot" style={{width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Spring Boot</div>
+  </div>
+  
+  <div className="Frame4" style={{width: 610, height: 142, left: -160, position: 'relative', marginTop: 200}}>
+    <div className="Rectangle25" style={{width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5'}} />
+    <div className="Rectangle26" style={{width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF'}} />
+    <div className="Kisti" style={{left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>KISTI</div>
+    <div className="04202310" style={{width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>2023-04 - 2023-10</div>
+    <div style={{left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word'}}>기계학습 기술 수요</div>
+    <div className="Rectangle27" style={{width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF'}} />
+    <div className="Rectangle27" style={{width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
+    <div className="React" style={{width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>React</div>
+    <div className="Rectangle28" style={{width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
+    <div className="NodeJs" style={{width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Node.js</div>
+  </div>
+  */}
+
+  {projects.length > 0 ? (
+    projects.map((project, index) => (
+      <div key={index} className={`Frame${index + 3}`} style={{ width: 610, height: 142, left: -160 * index, position: 'relative', marginTop: 200 }}>
+        <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} />
+        <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
+        <div className="ProjectName" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.title}</div>
+        <div className="ProjectDate" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.period}</div>
+        <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>{project.title}</div>
+        {project.techStacks.map((techStack, stackIndex) => (
+          <div key={stackIndex} className={`Rectangle${stackIndex + 27}`} style={{ width: 106, height: 35, left: 24 + (stackIndex * 122), top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }}>
+            <div className={techStack.techStackName} style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{techStack.techStackName}</div>
+          </div>
+        ))}
+        <div className="Rectangle29" style={{ width: 106, height: 35, left: 24 + (project.techStacks.length * 122), top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }}>
+          <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.partnerCompany}</div>
+        </div>
+        <img className="ProjectThumbnail" style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 500, top: 20 }} src={project.thumbnailUrl} alt="Project Thumbnail" />
+      </div>
+    ))
+  ) : (
+    // If there are no projects, display a placeholder or message
+    <div className="Frame3" style={{ width: 610, height: 142, marginTop: 200, left: -300, position: 'relative' }}>
+      <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} />
+      <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
+      <div className="Etri" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>No Data</div>
+      <div className="01202306" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
+      <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>No Project Available</div>
+      <div className="Rectangle27" style={{ width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF' }} />
+      <div className="Rectangle27" style={{ width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
+      <div className="Java" style={{ width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
+      <div className="Rectangle28" style={{ width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
+      <div className="SpringBoot" style={{ width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
+      <div className="Rectangle29" style={{ width: 106, height: 35, left: 268, top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }} />
+      <div className="Etri" style={{ width: 106, height: 20, left: 268, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
+    </div>
+  )}
+  
+  
+   
+
     {/* 네비바 */}
    <div className="Home" style={{ left: 63, top: 198, position: 'absolute', color: '#412C86', fontSize: '1.5em', fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word', cursor: 'pointer'}} onClick={MainPage}>
     HOME
@@ -62,43 +129,11 @@ function ProjectPage() {
     </div>
     
 
-    <div className="DonggukUniversity" style={{left: 1250, top: 13, position: 'absolute', textAlign: 'right', color: '#777777', fontSize: 20, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Dongguk University</div>
-    <div className="Line1" style={{width: 1363, height: 0, left: 42, top: 356, position: 'absolute', border: '1px #777777 solid'}}></div>
-    <div className="Rectangle25" style={{width: 1357, height: 75, left: 45, top: 591, position: 'absolute', background: '#F5F5F5'}} />
-    <div className="Rectangle26" style={{width: 11, height: 75, left: 45, top: 591, position: 'absolute', background: '#A994FF'}} />
-   
+    
 {/* api 데이터 연동 */}
-            <div style={{ left: 70, top: 636, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>
-                {newProject.projectName} 
-            </div>
-
-            <div className="NewProject" style={{ left: 70, top: 605, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>
-                {newProject.projectName} 
-                 </div>
-
-            <div className="03" style={{ left: 898, top: 622, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>
-                {newProject.startDate} 
-                   </div>
-
-            <div className="Year" style={{ left: 1108, top: 622, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>
-                {newProject.duration}
-                   </div>
+            
 
 
-    <div className="Rectangle27" style={{width: 106, height: 50, left: 1263, top: 604, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
-    <div className="Ongoing" style={{width: 106, height: 20, left: 1263, top: 619, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Ongoing</div>
-    <div className="Rectangle28" style={{width: 1357, height: 75, left: 45, top: 683, position: 'absolute', background: '#F5F5F5'}} />
-    <div className="Rectangle29" style={{width: 11, height: 75, left: 45, top: 683, position: 'absolute', background: '#A994FF'}} />
-    <div style={{left: 70, top: 727, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기계학습 기반 기술수요 추출 알고리즘 개발</div>
-    <div className="DevelopingExtractionAlgorithmOfTechnologyNeedsBasedOnMachineLearning" style={{left: 70, top: 697, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Developing extraction algorithm of technology needs based on machine learning</div>
-    <div className="03" style={{left: 898, top: 714, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>2023.03</div>
-    <div className="Month" style={{left: 1097, top: 714, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>8 Month</div>
-    
-    <div className="Rectangle30" style={{width: 106, height: 50, left: 1263, top: 696, position: 'absolute', background: '#D9534F', borderRadius: 8}} />
-    <div className="Complete" style={{width: 106, height: 20, left: 1263, top: 711, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Complete</div>
-
-
-    
     </div>
 
     
