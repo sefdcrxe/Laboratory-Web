@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 //import axios from '../../axiosConfig';
 import axios from 'axios';
 
+
 function ProjectPage() {
 
     const navigate = useNavigate();
@@ -11,7 +12,6 @@ function ProjectPage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Fetch data from the API endpoint using Axios
         axios.get('/projects')
             .then(response => {
                 setProjects(response.data);
@@ -27,6 +27,7 @@ function ProjectPage() {
     const ProjectPage = () => {navigate("/ProjectPage");};
     const MemberPage = () => {navigate("/MemberPage");};
     const ContactPage = () => {navigate("/ContactPage");};
+    const DetailProjectPage = () => {navigate("/DetailProjectPage");};
 
   return (
     <div className="ProjectPage d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -74,7 +75,9 @@ function ProjectPage() {
   {projects.length > 0 ? (
     projects.map((project, index) => (
       <div key={index} className={`Frame${index + 3}`} style={{ width: 610, height: 142, left: -160 * index, position: 'relative', marginTop: 200 }}>
-        <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} />
+
+      
+        <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} onClick={DetailProjectPage}/>
         <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
         <div className="ProjectName" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.title}</div>
         <div className="ProjectDate" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.period}</div>
@@ -92,26 +95,26 @@ function ProjectPage() {
     ))
   ) : (
     // If there are no projects, display a placeholder or message
-    <div className="Frame3" style={{ width: 610, height: 142, marginTop: 200, left: -300, position: 'relative' }}>
+    <div className="Frame3" style={{ width: 610, height: 142, marginTop: 200, left: -300, position: 'relative' }} onClick={DetailProjectPage}>
       <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} />
       <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
-      <div className="Etri" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>No Data</div>
-      <div className="01202306" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
-      <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>No Project Available</div>
+      <div className="Etri" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>Etri</div>
+      <div className="01202306" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>2023-01 - 2023-06</div>
+      <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>빅테크 기업 프로젝트</div>
       <div className="Rectangle27" style={{ width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF' }} />
       <div className="Rectangle27" style={{ width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
-      <div className="Java" style={{ width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
+      <div className="Java" style={{ width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>Java</div>
       <div className="Rectangle28" style={{ width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
-      <div className="SpringBoot" style={{ width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
-      <div className="Rectangle29" style={{ width: 106, height: 35, left: 268, top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }} />
-      <div className="Etri" style={{ width: 106, height: 20, left: 268, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>N/A</div>
-    </div>
+      <div className="SpringBoot" style={{ width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>SpringBoot</div>
+      </div>
   )}
   
   
    
 
     {/* 네비바 */}
+    <div className="DonggukUniversity" style={{left: 1250, top: 13, position: 'absolute', textAlign: 'right', color: '#777777', fontSize: 20, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Dongguk University</div>
+      
    <div className="Home" style={{ left: 63, top: 198, position: 'absolute', color: '#412C86', fontSize: '1.5em', fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word', cursor: 'pointer'}} onClick={MainPage}>
     HOME
     </div>
