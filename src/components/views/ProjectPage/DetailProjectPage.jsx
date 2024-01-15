@@ -10,7 +10,7 @@ function DetailProjectPage() {
   const [projectDetails, setProjectDetails] = useState(null);
 
   useEffect(() => {
-    axios.get(`/projects/${projectId}`)
+    axios.get(`http://localhost:8080/projects/${projectId}`)
       .then(response => {
         setProjectDetails(response.data);
       })
