@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar as CustomNavbar, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 //import axios from '../../axiosConfig';
-import axios from 'axios';
+import axios from '../../axiosConfig'
 
 
 function ProjectPage() {
@@ -12,7 +12,7 @@ function ProjectPage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('/projects')
+        axios.get('http://localhost:8080/projects')
             .then(response => {
                 setProjects(response.data);
             })
@@ -98,14 +98,14 @@ function ProjectPage() {
     <div className="Frame3" style={{ width: 610, height: 142, marginTop: 200, left: -300, position: 'relative' }} onClick={DetailProjectPage}>
       <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} />
       <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
-      <div className="Etri" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>Etri</div>
-      <div className="01202306" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>2023-01 - 2023-06</div>
-      <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>빅테크 기업 프로젝트</div>
+      <div className="Etri" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>협력사</div>
+      <div className="01202306" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>기간</div>
+      <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>프로젝트 명</div>
       <div className="Rectangle27" style={{ width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF' }} />
       <div className="Rectangle27" style={{ width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
-      <div className="Java" style={{ width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>Java</div>
+      <div className="Java" style={{ width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>기술스택1</div>
       <div className="Rectangle28" style={{ width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
-      <div className="SpringBoot" style={{ width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>SpringBoot</div>
+      <div className="SpringBoot" style={{ width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>기술스택2</div>
       </div>
   )}
   

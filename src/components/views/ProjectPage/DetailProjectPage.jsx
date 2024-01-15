@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Navbar as CustomNavbar, Nav } from 'react-bootstrap';
 //import '../MainPage/MainPage.css';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axiosConfig'
 
 
 function DetailProjectPage() {
@@ -48,14 +48,14 @@ function DetailProjectPage() {
     <div className="Frame5" style={{width: 610, height: 142, left: 42, top: 395, position: 'absolute'}}>
       <div className="Rectangle25" style={{width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5'}} />
       <div className="Rectangle26" style={{width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF'}} />
-      <div className="Etri" style={{left: 25, top: 70, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>etri</div>
-      <div className="01202306" style={{width: 186, left: 25, top: 42, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>2023-01 - 2023-06</div>
-      <div style={{left: 25, top: 12, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word'}}>빅테크 기업 프로젝트</div>
+      <div className="Etri" style={{left: 25, top: 70, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>협력사</div>
+      <div className="01202306" style={{width: 186, left: 25, top: 42, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기간</div>
+      <div style={{left: 25, top: 12, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word'}}>프로젝트 명</div>
       <div className="Rectangle27" style={{width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF'}} />
       <div className="Rectangle27" style={{width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
-      <div className="Java" style={{width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Java</div>
+      <div className="Java" style={{width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기술스택1</div>
       <div className="Rectangle28" style={{width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
-      <div className="SpringBoot" style={{width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Spring Boot</div>
+      <div className="SpringBoot" style={{width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기술스택2</div>
     </div>
 
     {projectDetails && (
