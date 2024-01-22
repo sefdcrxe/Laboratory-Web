@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar as CustomNavbar, Nav } from 'react-bootstrap';
-//import '../MainPage/MainPage.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../../axiosConfig'
+import { fetchProjects, detailProjects } from '../../../_actions/user_action'
 
 
 function DetailProjectPage() {
+  const navigate = useNavigate();
   const { projectId } = useParams();
   const [projectDetails, setProjectDetails] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/projects/${projectId}`)
-      .then(response => {
-        setProjectDetails(response.data);
-      })
-      .catch(error => {
+    const fetchData = async () => {
+      try {
+        const response = await detailProjects(projectId); // Use the action to fetch project details
+        setProjectDetails(response);
+      } catch (error) {
         console.error('Error fetching project details:', error);
-      });
+        // Handle error, e.g., redirect to an error page
+      }
+    };
+
+    fetchData();
   }, [projectId]);
   
   return (
@@ -65,11 +69,18 @@ function DetailProjectPage() {
         <div className="partnerCompany" style={{ left: 25, top: 70, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.partnerCompany}</div>
         <div className="period" style={{ width: 186, left: 25, top: 42, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.period}</div>
         <div style={{ left: 25, top: 12, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>{projectDetails.title}</div>
-        <div className="Rectangle27" style={{ width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF' }} />
-        <div className="Rectangle27" style={{ width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
-        <div className="Rectangle28" style={{ width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }} />
-        <div className="techStackName" style={{ width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.techStacks[0].techStackName}</div>
 
+        {projectDetails.techStacks.map((techStack, index) => (
+          <div key={index} className={`Rectangle${27 + index}`} style={{ width: 106, height: 35, left: 24 + (index * 122), top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }}>
+            <div className="techStackName" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{techStack.techStackName}</div>
+          </div>
+        ))}
+
+        <div className="Rectangle27" style={{ width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF' }} />
+        <div className="Rectangle27" style={{ width: 106, height: 35, left: 24 + (projectDetails.techStacks.length * 122), top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }}>
+          <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.partnerCompany}</div>
+        </div>
+        
         <div>
           <h3>Files:</h3>
           <ul>
@@ -80,6 +91,7 @@ function DetailProjectPage() {
             ))}
           </ul>
         </div>
+        
         <div>
           <h3>Tech Stacks:</h3>
           <ul>
@@ -88,6 +100,7 @@ function DetailProjectPage() {
             ))}
           </ul>
         </div>
+        
         <div>
           <h3>Project Images:</h3>
           {projectDetails.projectImages.map(image => (
@@ -99,7 +112,6 @@ function DetailProjectPage() {
         </div>
       </div>
     )}
-    
 
     
   </div>
