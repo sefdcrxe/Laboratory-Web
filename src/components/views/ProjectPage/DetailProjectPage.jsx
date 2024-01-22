@@ -12,7 +12,21 @@ function DetailProjectPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // projectId가 정상적으로 설정되었는지 확인
+        if (!projectId) {
+          console.error('projectId is undefined');
+          return;
+        }
+
         const response = await detailProjects(projectId); // Use the action to fetch project details
+
+        // 서버에서 projectId에 대한 데이터가 없을 경우의 처리
+        if (!response) {
+          console.error(`No data found for projectId: ${projectId}`);
+          // Handle error, e.g., redirect to an error page
+          return;
+        }
+
         setProjectDetails(response);
       } catch (error) {
         console.error('Error fetching project details:', error);
@@ -22,6 +36,7 @@ function DetailProjectPage() {
 
     fetchData();
   }, [projectId]);
+
   
   return (
     <div className="DetailProjectPage d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -62,6 +77,7 @@ function DetailProjectPage() {
       <div className="SpringBoot" style={{width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기술스택2</div>
     </div>
 
+    
     {projectDetails && (
       <div className="Frame5" style={{ width: 610, height: 142, left: 42, top: 395, position: 'absolute' }}>
         <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} />
@@ -80,7 +96,7 @@ function DetailProjectPage() {
         <div className="Rectangle27" style={{ width: 106, height: 35, left: 24 + (projectDetails.techStacks.length * 122), top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }}>
           <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.partnerCompany}</div>
         </div>
-        
+
         <div>
           <h3>Files:</h3>
           <ul>
@@ -91,7 +107,7 @@ function DetailProjectPage() {
             ))}
           </ul>
         </div>
-        
+
         <div>
           <h3>Tech Stacks:</h3>
           <ul>
@@ -100,7 +116,7 @@ function DetailProjectPage() {
             ))}
           </ul>
         </div>
-        
+
         <div>
           <h3>Project Images:</h3>
           {projectDetails.projectImages.map(image => (
