@@ -7,7 +7,6 @@ import ContactPage from "./components/views/ContactPage/ContactPage";
 import DetailProjectPage from "./components/views/ProjectPage/DetailProjectPage";
 
 function App() {
-  const token = localStorage.getItem('accessToken');
 
   return (
     <div>
@@ -17,7 +16,7 @@ function App() {
           <Route path="/MemberPage" element={<MemberPage />} />
           <Route path="/ProjectPage" element={<ProjectPage />} />
           <Route path="/ContactPage" element={<ContactPage />} />
-          <Route path="/DetailProjectPage" element={<DetailProjectPage />} />
+          <Route path="/projects/:projectId/*" element={<DetailProjectPage />} />
         </Routes>
       </Router>
     </div>

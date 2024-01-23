@@ -3,40 +3,50 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../../axiosConfig'
 import { fetchProjects, detailProjects } from '../../../_actions/user_action'
 
-
 function DetailProjectPage() {
+  
   const navigate = useNavigate();
   const { projectId } = useParams();
   const [projectDetails, setProjectDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const handleProjectClick = (projectId) => {
+    navigate(`/projects/${projectId}`);
+  };
+      const MainPage = () => {navigate("/");};
+      const ProjectPage = () => {navigate("/ProjectPage");};
+      const MemberPage = () => {navigate("/MemberPage");};
+      const ContactPage = () => {navigate("/ContactPage");};
+      const DetailProjectPage = () => {navigate("/DetailProjectPage");};
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // projectId가 정상적으로 설정되었는지 확인
-        if (!projectId) {
-          console.error('projectId is undefined');
-          return;
-        }
-
-        const response = await detailProjects(projectId); // Use the action to fetch project details
-
-        // 서버에서 projectId에 대한 데이터가 없을 경우의 처리
-        if (!response) {
-          console.error(`No data found for projectId: ${projectId}`);
-          // Handle error, e.g., redirect to an error page
-          return;
-        }
-
+        const response = await fetchProjectDetails(projectId);
+        console.log('API response:', response);
         setProjectDetails(response);
       } catch (error) {
-        console.error('Error fetching project details:', error);
-        // Handle error, e.g., redirect to an error page
+        console.error('프로젝트 세부 정보를 가져오는 동안 오류 발생:', error);
+        setError('Error fetching project details');
+      } finally {
+        setLoading(false);
       }
     };
-
+  
     fetchData();
   }, [projectId]);
+  const fetchProjectDetails = async (projectId) => {
+    try {
+      const response = await axios.get(`/projects/${projectId}`);
+      return response.data; 
+    } catch (error) {
+      throw error;
+    }
+  };
 
+  
   
   return (
     <div className="DetailProjectPage d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -50,53 +60,62 @@ function DetailProjectPage() {
         <div className="Rectangle3" style={{width: 1447, height: 66, background: '#E9E4FF'}} />
       </div>
       <div className="Rectangle31" style={{width: 1447, height: 971, left: 0, top: 243, position: 'absolute', background: 'white'}} />
-      <div className="Home" style={{left: 63, top: 198, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>HOME</div>
       <div className="Project" style={{left: 48, top: 286, position: 'absolute', color: '#412C86', fontSize: 36, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Project</div>
-      <div className="Member" style={{left: 362, top: 198, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>MEMBER </div>
-      <div className="Contact" style={{left: 516, top: 197, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>CONTACT</div>
+
       <div className="Rectangle32" style={{width: 139, height: 65, left: 174, top: 177, position: 'absolute', background: '#A994FF'}} />
-      <div className="Project" style={{left: 191, top: 197, position: 'absolute', color: 'white', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>PROJECT</div>
+
       <div className="DonggukUniversity" style={{left: 1250, top: 13, position: 'absolute', textAlign: 'right', color: '#777777', fontSize: 20, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Dongguk University</div>
       <div className="Line2" style={{width: 1363, height: 0, left: 42, top: 356, position: 'absolute', border: '1px #777777 solid'}}></div>
-      <div className="Rectangle40" style={{width: 981, height: 257, left: 42, top: 575, position: 'absolute', background: '#F5F5F5'}} />
-      <div className="Rectangle41" style={{width: 11, height: 257, left: 42, top: 575, position: 'absolute', background: '#A994FF'}} />
-      <div style={{width: 920, left: 76, top: 584, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', lineHeight: 24, wordWrap: 'break-word'}}>내용</div>
-      <div className="Rectangle42" style={{width: 981, height: 180, left: 42, top: 875, position: 'absolute', background: '#F5F5F5'}} />
-    </div>
-    
-    <div className="Frame5" style={{width: 610, height: 142, left: 42, top: 395, position: 'absolute'}}>
-      <div className="Rectangle25" style={{width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5'}} />
-      <div className="Rectangle26" style={{width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF'}} />
-      <div className="Etri" style={{left: 25, top: 70, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>협력사</div>
-      <div className="01202306" style={{width: 186, left: 25, top: 42, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기간</div>
-      <div style={{left: 25, top: 12, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word'}}>프로젝트 명</div>
-      <div className="Rectangle27" style={{width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF'}} />
-      <div className="Rectangle27" style={{width: 106, height: 35, left: 24, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
-      <div className="Java" style={{width: 106, height: 20, left: 24, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기술스택1</div>
-      <div className="Rectangle28" style={{width: 106, height: 35, left: 146, top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8}} />
-      <div className="SpringBoot" style={{width: 106, height: 20, left: 146, top: 103, position: 'absolute', textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>기술스택2</div>
-    </div>
+      <div className="Rectangle41" style={{width: 11, height: 550, left: 42, top: 575, position: 'absolute', background: '#A994FF'}} />
 
+      </div>
+    
+   
     
     {projectDetails && (
-      <div className="Frame5" style={{ width: 610, height: 142, left: 42, top: 395, position: 'absolute' }}>
-        <div className="Rectangle25" style={{ width: 610, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} />
-        <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
-        <div className="partnerCompany" style={{ left: 25, top: 70, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.partnerCompany}</div>
-        <div className="period" style={{ width: 186, left: 25, top: 42, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.period}</div>
-        <div style={{ left: 25, top: 12, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>{projectDetails.title}</div>
+      
+      <div className="Frame5" style={{ width: 1610, height: 142, left: 42, top: 395, position: 'absolute' }}>
+      
 
-        {projectDetails.techStacks.map((techStack, index) => (
-          <div key={index} className={`Rectangle${27 + index}`} style={{ width: 106, height: 35, left: 24 + (index * 122), top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }}>
-            <div className="techStackName" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{techStack.techStackName}</div>
-          </div>
-        ))}
+        <div className="Rectangle25" style={{ width: 1110, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} onClick={() => DetailProjectPage(projectDetails.projectId)} />
+          <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
 
-        <div className="Rectangle27" style={{ width: 201, height: 118, left: 402, top: 12, position: 'absolute', background: '#A994FF' }} />
-        <div className="Rectangle27" style={{ width: 106, height: 35, left: 24 + (projectDetails.techStacks.length * 122), top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }}>
-          <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.partnerCompany}</div>
-        </div>
+          <div className="ProjectDate" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.period}</div>
+          <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>{projectDetails.title}</div>
+          {projectDetails.techStacks.map((techStack, stackIndex) => (
+            <div key={stackIndex} className={`Rectangle${stackIndex + 27}`} style={{ width: 106, height: 35, left: 24 + (stackIndex * 122), top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }}>
+              <div className={techStack.techStackName} style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{techStack.techStackName}</div>
+            </div>
+          ))}
 
+
+      
+        <div className="Rectangle29" style={{ width: 106, height: 35, left: 24 + (projectDetails.techStacks.length * 122), top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }}>
+        <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.partnerCompany}</div>
+      </div>
+
+      
+      <img
+      className="ProjectThumbnail"
+      style={{ width: 1100, height: 100, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 900, top: 20 }}
+      src={projectDetails.projectImages.length > 0 ? projectDetails.projectImages[0].imageUrl : '기본 이미지 URL'}
+      alt="projectDetails Thumbnail"
+    />
+
+    <div className="Rectangle40" style={{ width: 981, height: 550, left: 10, top: 180, position: 'absolute', background: '#F5F5F5' }}>
+      {projectDetails.description && (
+        <p style={{ margin: 10, color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', lineHeight: 1.6, wordWrap: 'break-word' }}>
+          {projectDetails.description}
+        </p>
+      )}
+    </div>
+
+
+    
+
+
+
+        
         <div>
           <h3>Files:</h3>
           <ul>
@@ -108,28 +127,32 @@ function DetailProjectPage() {
           </ul>
         </div>
 
-        <div>
-          <h3>Tech Stacks:</h3>
-          <ul>
-            {projectDetails.techStacks.map(techStack => (
-              <li key={techStack.techStackId}>{techStack.techStackName}</li>
-            ))}
-          </ul>
-        </div>
+      
 
-        <div>
-          <h3>Project Images:</h3>
-          {projectDetails.projectImages.map(image => (
-            <div key={image.imageId}>
-              <img src={image.imageUrl} alt={image.description} style={{ maxWidth: '100%', height: 'auto' }} />
-              <p>{image.description}</p>
-            </div>
-          ))}
-        </div>
       </div>
     )}
 
     
+    {/* 네비바 */}
+    <div className="DonggukUniversity" style={{left: 1250, top: 13, position: 'absolute', textAlign: 'right', color: '#777777', fontSize: 20, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Dongguk University</div>
+      
+   <div className="Home" style={{ left: 63, top: 198, position: 'absolute', color: '#412C86', fontSize: '1.5em', fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word', cursor: 'pointer'}} onClick={MainPage}>
+    HOME
+    </div>
+
+    <div className="Project" style={{ left: 191, top: 197, position: 'absolute', color: 'white', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word', cursor: 'pointer'}} onClick={ProjectPage}>
+    PROJECT
+    </div>
+
+    <div className="Member" style={{left: 362, top: 198, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word', cursor: 'pointer'}} onClick={MemberPage}>
+    MEMBER 
+    </div>
+
+    <div className="Contact" style={{left: 516, top: 197, position: 'absolute', color: '#412C86', fontSize: 24, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word', cursor: 'pointer'}} onClick={ContactPage}>
+    CONTACT
+    </div>
+    
+
   </div>
     </div>
   );

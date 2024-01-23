@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar as CustomNavbar, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //import axios from '../../axiosConfig';
 import axios from '../../axiosConfig'
-import { fetchProjects } from '../../../_actions/user_action'
+import { fetchProjects, detailProjects } from '../../../_actions/user_action'
 
 function ProjectPage() {
 
@@ -38,8 +39,16 @@ function ProjectPage() {
     fetchData();
   }, []);
   
+  useEffect(() => {
+    fetchProjects()
+      .then(data => setProjects(data))
+      .catch(error => console.error('Error fetching projects:', error));
+  }, []);
 
-
+ // const handleProjectClick = (projectId) => {navigate(projectId); };
+ const handleProjectClick = (projectId) => {
+  navigate(`/projects/${projectId}`);
+};
     const MainPage = () => {navigate("/");};
     const ProjectPage = () => {navigate("/ProjectPage");};
     const MemberPage = () => {navigate("/MemberPage");};
@@ -57,18 +66,19 @@ function ProjectPage() {
       <div className="Rectangle3" style={{width: 1447, height: 66, background: '#E9E4FF'}} />
     </div>
     <div className="Project" style={{left: 48, top: 286, position: 'absolute', color: '#412C86', fontSize: 36, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Project</div>
-    <div className="OurProjectAreAsFollows" style={{left: 48, top: 414, position: 'absolute', color: '#777777', fontSize: 32, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Our project are as follows :</div>
     
     <div className="Rectangle23" style={{width: 139, height: 65, left: 174, top: 177, position: 'absolute', background: '#A994FF'}} />
     
-  
-    {projects.length > 0 ? (
-      projects.map((project, index) => (
-        
-        <div key={index} className={`Frame${index + 3}`} style={{ width: 1610, height: 142, left: -160 * index, position: 'relative', marginTop: 200 }}>
-          <div className="Rectangle25" style={{ width: 1110, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} onClick={() => DetailProjectPage(project.projectId)} />
+
+{/* 상품 불러오기 */}
+<div className="row mt-4">
+
+{projects.length > 0 ? (
+  projects.map((project, index) => (
+    <Link to={`/projects/${project.projectId}`} key={project.projectId} className="link-no-underline" onClick={() => window.scrollTo(0, 0)}>
+    <div key={index} className={`Frame${index + 3}`} style={{ width: 1110, height: 142,top: -100, left: '50%', marginLeft: -160 * index - 555, position: 'relative', marginTop: 200 }}>
+    <div className="Rectangle25" style={{ width: 1110, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} onClick={() => DetailProjectPage(project.projectId)} />
           <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
-          <div className="ProjectName" style={{ left: 27, top: 71, position: 'absolute', color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.title}</div>
           <div className="ProjectDate" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.period}</div>
           <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>{project.title}</div>
           {project.techStacks.map((techStack, stackIndex) => (
@@ -83,6 +93,8 @@ function ProjectPage() {
           <img className="ProjectThumbnail" style={{ width: 1100, height: 100, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 900, top: 20 }} src={project.thumbnailUrl} alt="Project Thumbnail" />
        
         </div>
+        </Link>
+       
       ))
     ) : (
      <div className="Frame3" style={{ width: 610, height: 142, marginTop: 200, left: -300, position: 'relative' }} onClick={DetailProjectPage}>
@@ -101,7 +113,7 @@ function ProjectPage() {
     )}
 
   
-  
+    </div>
    
 
     {/* 네비바 */}
@@ -130,7 +142,7 @@ function ProjectPage() {
 
 
     </div>
-
+  
     
   );
 }
