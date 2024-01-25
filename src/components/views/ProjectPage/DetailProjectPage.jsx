@@ -102,6 +102,16 @@ function DetailProjectPage() {
       alt="projectDetails Thumbnail"
     />
 
+    {projectDetails.projectImages.map((image, index) => (
+      <img
+        key={index}
+        src={image.imageUrl}
+        alt={`Project Image ${index + 1}`}
+        style={{ width: 'auto', height: '100px', margin: '5px' }}
+      />
+    ))}
+    
+
     <div className="Rectangle40" style={{ width: 981, height: 550, left: 10, top: 180, position: 'absolute', background: '#F5F5F5' }}>
       {projectDetails.description && (
         <p style={{ margin: 10, color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', lineHeight: 1.6, wordWrap: 'break-word' }}>
@@ -114,19 +124,21 @@ function DetailProjectPage() {
     
 
 
-
-        
-        <div>
-          <h3>Files:</h3>
-          <ul>
-            {projectDetails.files.map(file => (
-              <li key={file.fileId}>
-                <a href={file.fileUrl} target="_blank" rel="noopener noreferrer">{file.fileName}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
+    <div>
+    <h3>파일 목록:</h3>
+    <ul>
+      {projectDetails.files.map((file, index) => (
+        <li key={index}>
+          <a href={file.fileUrl} target="_blank" rel="noopener noreferrer" download>
+            {file.fileName}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  
+  
+  
       
 
       </div>
