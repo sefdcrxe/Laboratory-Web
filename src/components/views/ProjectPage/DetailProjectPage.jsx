@@ -59,15 +59,13 @@ function DetailProjectPage() {
       <div className="Slider" style={{width: 1447, height: 66, left: 0, top: 177, position: 'absolute', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>
         <div className="Rectangle3" style={{width: 1447, height: 66, background: '#E9E4FF'}} />
       </div>
-      <div className="Rectangle31" style={{width: 1447, height: 971, left: 0, top: 243, position: 'absolute', background: 'white'}} />
       <div className="Project" style={{left: 48, top: 286, position: 'absolute', color: '#412C86', fontSize: 36, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word'}}>Project</div>
 
       <div className="Rectangle32" style={{width: 139, height: 65, left: 174, top: 177, position: 'absolute', background: '#A994FF'}} />
 
       <div className="DonggukUniversity" style={{left: 1250, top: 13, position: 'absolute', textAlign: 'right', color: '#777777', fontSize: 20, fontFamily: 'The Jamsil', fontWeight: '400', wordWrap: 'break-word'}}>Dongguk University</div>
       <div className="Line2" style={{width: 1363, height: 0, left: 42, top: 356, position: 'absolute', border: '1px #777777 solid'}}></div>
-      <div className="Rectangle41" style={{width: 11, height: 550, left: 42, top: 575, position: 'absolute', background: '#A994FF'}} />
-
+    
       </div>
     
    
@@ -94,6 +92,9 @@ function DetailProjectPage() {
         <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{projectDetails.partnerCompany}</div>
       </div>
 
+
+    
+  
       
       <img
       className="ProjectThumbnail"
@@ -102,40 +103,50 @@ function DetailProjectPage() {
       alt="projectDetails Thumbnail"
     />
 
-    {projectDetails.projectImages.map((image, index) => (
-      <img
-        key={index}
-        src={image.imageUrl}
-        alt={`Project Image ${index + 1}`}
-        style={{ width: 'auto', height: '100px', margin: '5px' }}
-      />
-    ))}
+   
     
 
-    <div className="Rectangle40" style={{ width: 981, height: 550, left: 10, top: 180, position: 'absolute', background: '#F5F5F5' }}>
+    <div className="Rectangle40" style={{ width: 981, height: 1500, left: 10, top: 180, position: 'absolute', background: '#F5F5F5' }}>
       {projectDetails.description && (
         <p style={{ margin: 10, color: '#777777', fontSize: 16, fontFamily: 'NanumSquare Neo', fontWeight: '350', lineHeight: 1.6, wordWrap: 'break-word' }}>
           {projectDetails.description}
         </p>
       )}
+
+      <div>
+      
+      <h5>파일 목록:</h5>
+      <ul>
+        {projectDetails.files.map((file, index) => (
+          <li key={index}>
+            <a href={file.fileUrl} target="_blank" rel="noopener noreferrer" download>
+              {file.fileName}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h5>이미지:</h5>
+      {projectDetails.projectImages.map((image, index) => (
+        <img
+          key={index}
+          src={image.imageUrl}
+          alt={`Project Image ${index + 1}`}
+          style={{ width: 'auto', height: '240px', margin: '5px' }}
+        />
+      ))}
     </div>
 
 
+
+    </div>
+   
+
     
-
-
-    <div>
-    <h3>파일 목록:</h3>
-    <ul>
-      {projectDetails.files.map((file, index) => (
-        <li key={index}>
-          <a href={file.fileUrl} target="_blank" rel="noopener noreferrer" download>
-            {file.fileName}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
+    
+  
   
   
   
