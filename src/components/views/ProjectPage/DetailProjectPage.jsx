@@ -97,7 +97,7 @@ function DetailProjectPage() {
       
       <img
       className="ProjectThumbnail"
-      style={{ width: 1100, height: 100, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 900, top: 20 }}
+      style={{ width: 270, height: 150, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 760}}
       src={projectDetails.projectImages.length > 0 ? projectDetails.projectImages[0].imageUrl : '기본 이미지 URL'}
       alt="projectDetails Thumbnail"
     />

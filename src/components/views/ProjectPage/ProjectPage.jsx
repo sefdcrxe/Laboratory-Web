@@ -76,7 +76,7 @@ function ProjectPage() {
 {projects.length > 0 ? (
   projects.map((project, index) => (
     <Link to={`/projects/${project.projectId}`} key={project.projectId} className="link-no-underline" onClick={() => window.scrollTo(0, 0)}>
-    <div key={index} className={`Frame${index + 3}`} style={{ width: 1110, height: 142,top: -100, left: '50%', marginLeft: -160 * index - 555, position: 'relative', marginTop: 200 }}>
+    <div key={index} className={`Frame${index + 3}`} style={{ width: 1110, height: 142,top: 0, left: '50%', marginLeft: -160 * index - 555, position: 'relative', marginTop: 200 }}>
     <div className="Rectangle25" style={{ width: 1110, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} onClick={() => DetailProjectPage(project.projectId)} />
           <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
           <div className="ProjectDate" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.period}</div>
@@ -90,7 +90,7 @@ function ProjectPage() {
           <div className="Rectangle29" style={{ width: 106, height: 35, left: 24 + (project.techStacks.length * 122), top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }}>
             <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.partnerCompany}</div>
           </div>
-          <img className="ProjectThumbnail" style={{ width: 1100, height: 100, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 900, top: 20 }} src={project.thumbnailUrl} alt="Project Thumbnail" />
+          <img className="ProjectThumbnail" style={{ width: 270, height: 150, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 760}}src={project.thumbnailUrl} alt="Project Thumbnail" />
        
         </div>
         </Link>
