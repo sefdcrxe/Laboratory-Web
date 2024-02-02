@@ -71,15 +71,13 @@ function ProjectPage() {
     
 
 {/* 상품 불러오기 */}
-<div className="row mt-4">
-
-{projects.length > 0 ? (
-  projects.map((project, index) => (
-    <Link to={`/projects/${project.projectId}`} key={project.projectId} className="link-no-underline" onClick={() => window.scrollTo(0, 0)}>
-    <div key={index} className={`Frame${index + 3}`} style={{ width: 1110, height: 142,top: 0, left: '50%', marginLeft: -160 * index - 555, position: 'relative', marginTop: 200 }}>
-    <div className="Rectangle25" style={{ width: 1110, height: 142, left: 0, top: 0, position: 'absolute', background: '#F5F5F5' }} onClick={() => DetailProjectPage(project.projectId)} />
-          <div className="Rectangle26" style={{ width: 11, height: 142, left: 0, top: 0, position: 'absolute', background: '#A994FF' }} />
-          <div className="ProjectDate" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.period}</div>
+ <div className="row mt-4">
+        {projects.length > 0 ? (
+          projects.map((project, index) => (
+            <Link to={`/projects/${project.projectId}`} key={project.projectId} className="link-no-underline" onClick={() => window.scrollTo(0, 0)}>
+              <div key={index} className={`Frame${index + 3}`} style={{ width: 1110, height: 200, top: 400, left: '50%', marginLeft: -550, position: 'relative', marginTop: 20 }}>
+                <div className="Rectangle25" style={{ width: 1110, height: 200, left: 0, top: 0, position: 'absolute', background: '#F5F5F5', overflow: 'hidden' }} onClick={() => DetailProjectPage(project.projectId)} />
+                   <div className="ProjectDate" style={{ width: 186, left: 27, top: 43, position: 'absolute', color: '#777777', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.period}</div>
           <div style={{ left: 27, top: 13, position: 'absolute', color: '#777777', fontSize: 24, fontFamily: 'Karla', fontWeight: '300', wordWrap: 'break-word' }}>{project.title}</div>
           {project.techStacks.map((techStack, stackIndex) => (
             <div key={stackIndex} className={`Rectangle${stackIndex + 27}`} style={{ width: 106, height: 35, left: 24 + (stackIndex * 122), top: 96, position: 'absolute', background: '#7FC87D', borderRadius: 8 }}>
@@ -90,7 +88,7 @@ function ProjectPage() {
           <div className="Rectangle29" style={{ width: 106, height: 35, left: 24 + (project.techStacks.length * 122), top: 96, position: 'absolute', background: '#A994FF', borderRadius: 8 }}>
             <div className="Etri" style={{ width: 106, height: 20, textAlign: 'center', color: 'white', fontSize: 11, fontFamily: 'NanumSquare Neo', fontWeight: '350', wordWrap: 'break-word' }}>{project.partnerCompany}</div>
           </div>
-          <img className="ProjectThumbnail" style={{ width: 270, height: 150, objectFit: 'cover', borderRadius: 8, position: 'absolute', left: 760}}src={project.thumbnailUrl} alt="Project Thumbnail" />
+          <img className="ProjectThumbnail" style={{ width: 270, height: 150, objectFit: 'cover', borderRadius: 8, position: 'absolute', top: 25, left: 800}}src={project.thumbnailUrl} alt="Project Thumbnail" />
        
         </div>
         </Link>
